@@ -1,0 +1,34 @@
+#!/bin/sh
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Error: No video file provided."
+  echo "Usage: vidstream <video-file>"
+  exit 1
+fi
+videofile=$1
+if [ ! -f "$videofile" ]; then
+  echo "Error: File '$videofile' not found."
+  exit 1
+fi
+
+echo  ------------------------
+echo "  $videofile"
+echo  ------------------------
+
+echo -n "Starting GStreamer pipeline" && \
+echo -n && echo -n . && sleep 1 && echo -n . && sleep 1 && echo .
+# Resolve LAN IP
+if command -v ip >/dev/null 2>&1; then
+  LAN_IP=$(ip route get 1 | awk '{print $NF; exit}')
+else
+  LAN_IP=$(ipconfig getifaddr en0)
+fi
+echo "View the stream on your LAN by opening a network stream at: rtp://${LAN_IP}.local:5000"
+
+# GStreamer pipeline
+gst-launch-1.0 filesrc location="$1" \
+  ! decodebin \
+  ! x264enc tune=zerolatency \
+  ! rtph264pay \
+  ! udpsink host=0.0.0.0 port=5000

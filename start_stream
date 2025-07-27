@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Start D-Bus system daemon
+echo "Starting D-Bus..."
+dbus-daemon --system
+
+# Start avahi-daemon as root
+echo "Starting Avahi..."
+avahi-daemon --no-chroot --daemonize
+
+# Drop privileges to 'streamer'
+su-exec streamer vidstream "$@"
