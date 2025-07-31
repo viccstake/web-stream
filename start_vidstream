@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
 
-# Start D-Bus system daemon
-echo "Starting D-Bus..."
+# As root:
+echo "Starting D-Bus daemon..."
 dbus-daemon --system
-
-# Start avahi-daemon as root
-echo "Starting Avahi..."
+echo "Starting Avahi daemon..."
 avahi-daemon --no-chroot --daemonize
 
 # Drop privileges to 'streamer'

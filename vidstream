@@ -30,5 +30,5 @@ echo "View the stream on your LAN by opening a network stream at: rtp://${LAN_IP
 gst-launch-1.0 filesrc location="$1" \
   ! decodebin \
   ! x264enc tune=zerolatency \
-  ! rtph264pay \
-  ! udpsink host=0.0.0.0 port=5000
+  ! rtph264pay config-interval=1 pt=96 \
+  ! udpsink host=224.1.1.1 port=5000 auto-multicast=true
