@@ -1,9 +1,9 @@
 FROM alpine:latest
 
 # Install gstreamer, avahi and other utils
-RUN apk add --no-cache gstreamer gstreamer-tools gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav 
-RUN apk add --no-cache avahi dbus
-RUN apk add --no-cache su-exec
+RUN apk add --no-cache  gstreamer gstreamer-tools gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav 
+RUN apk add --no-cache  avahi dbus
+RUN apk add --no-cache  bash su-exec
 
 # Create a non-root user
 RUN addgroup -S streamer && adduser -S streamer -G streamer
