@@ -17,9 +17,8 @@ videofile_abs_path="$(cd "$(dirname "$videofile")" && pwd)/$(basename "$videofil
 videoname=$(basename "$videofile_abs_path")
 video_path_in_container="/home/streamer/$videoname"
 
-echo "Running $IMAGE_NAME on: $videoname"
 docker run --rm -p 5000:5000/udp \
     -v "${videofile_abs_path}:${video_path_in_container}:ro" \
-    --hostname "${IMAGE_NAME}_${videoname} \
+    --hostname "${IMAGE_NAME}_${videoname}" \
     $IMAGE_NAME \
     $video_path_in_container

@@ -5,7 +5,6 @@
   <service>
     <type>_rtp._udp</type>
     <port>5000</port>
-    <txt-record>description=GStreamer Video Stream</txt-record>
     <txt-record>description=GStreamer H.264 Stream</txt-record>
     <txt-record>codec=H264</txt-record>
     <txt-record>bitrate=variable</txt-record>

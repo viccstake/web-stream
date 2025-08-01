@@ -12,22 +12,12 @@ if [ ! -f "$videofile" ]; then
   exit 1
 fi
 
-echo  ------------------------
-echo "  $videofile"
-echo  ------------------------
-
-echo -n "Starting GStreamer pipeline" && \
-echo -n && echo -n . && sleep 1 && echo -n . && sleep 1 && echo .
-# Resolve LAN IP
-if command -v ip >/dev/null 2>&1; then
-  LAN_IP=$(ip route get 1 | awk '{print $NF; exit}')
-else
-  LAN_IP=$(ipconfig getifaddr en0)
-fi
-echo "View the stream on your LAN by opening a network stream at: rtp://${LAN_IP}.local:5000"
+echo "Starting GStreamer pipeline.."
+echo ---------------------------------
+echo $videofile
 
 # GStreamer pipeline
-gst-launch-1.0 filesrc location="$1" \
+gst-launch-1.0 filesrc location="$videofile" \
   ! decodebin \
   ! x264enc tune=zerolatency \
   ! rtph264pay config-interval=1 pt=96 \

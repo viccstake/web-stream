@@ -23,9 +23,9 @@ EXPOSE 5000/udp
 # D-Bus need this directory to exist
 RUN mkdir -p /run/dbus
 
-# Add entrypoint wrapper as root for necessary initializations
+# Add entrypoint wrapper, 'start_vidstream', as root for necessary initializations
 COPY start_vidstream /usr/local/bin/start_vidstream
 RUN chmod +x /usr/local/bin/start_vidstream
 
-# Switch to streamer-user in 'start_stream' command
+# Switch to streamer-user in 'start_vidstream' script
 ENTRYPOINT ["/usr/local/bin/start_vidstream"]
