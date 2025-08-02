@@ -15,10 +15,11 @@ fi
 echo "Starting GStreamer pipeline.."
 echo ---------------------------------
 echo $videofile
+RECEIVER_IP=127.0.0.1
 
 # GStreamer pipeline
 gst-launch-1.0 filesrc location="$videofile" \
   ! decodebin \
   ! x264enc tune=zerolatency \
   ! rtph264pay config-interval=1 pt=96 \
-  ! udpsink host=224.1.1.1 port=5000 auto-multicast=true
+  ! udpsink host=$RECEIVER_IP port=5000
