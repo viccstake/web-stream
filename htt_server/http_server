@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Encode DNS name
+PORT=((5000))
+DOMAIN_NAME="stream@$(hostname)":${PORT}
+
+# Endpoints
+# GET https://stream@{hostname}:{PORT}/streams/{key}?{value}
+#   Get json array of stream connections currently open
+#       - if authenticated: also return unicast streams
+
+# GET https://stream@{hostname}:{PORT}/streams/{streamProtocol}/{key}?{value}
+#   Get json array of stream connection at host by connection type
+
+# POST https://stream@{hostname}:{PORT}/streams/{streamProtocol}/{key}?{value}
+#   Create a new stream-connection
+#       - if whitelisted user: open unicast stream 
+#         else: deny request
+
+
+# States in .json to represent streams
+initStreamState() {
+cat <<EOF 
+{
+    "streamProtocol":""
+    "allowedIps":[]
+    "authenticationLevel":0
+    "codec": {}
+}
+EOF
+}
+
+# Connections / start-watching happens through client side bash-script
+#   - sometimes separate from http
+#   - either whitelist users on stream initialization
+#   - or accept Authorization Bearer PUT request on whitelist
+
+# Initialize servers
+#   Dash protocol over HTTP
+function dashServer() {
+    echo "Starting dash server $@"
+    mkdir -p http_server/streams
+    fd=$(cd http_server/streams && mktemp)
+}
+
+#   RTP live streaming (uni/multi)
+
+# Get machine's local IP
+
+# Local (on machine) DNS record setup
+
+# Local Area Network DNS request
+
+# Start web server
+
+# Handle requests

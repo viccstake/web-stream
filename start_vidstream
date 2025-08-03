@@ -1,13 +1,6 @@
 #!/bin/bash
-set -e
 
-# As root:
-echo -n "Starting D-Bus daemon"
 dbus-daemon --system
-sleep 1 && echo -n . && sleep 1 && echo .
-echo -n "Starting Avahi daemon"
 avahi-daemon --no-chroot --daemonize
-sleep 1 && echo -n . && sleep 1 && echo . && sleep 1
 
-# Drop privileges to 'streamer' user
 su-exec streamer vidstream "$@"
