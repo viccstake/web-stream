@@ -1,6 +1,0 @@
-#!/bin/bash
-
-dbus-daemon --system
-avahi-daemon --no-chroot --daemonize
-
-su-exec streamer vidstream "$@"
