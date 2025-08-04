@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-source .env
 
 if [ $# -eq 0 ]; then
   echo "Error: No video file provided."
