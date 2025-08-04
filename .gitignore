@@ -1,5 +1,4 @@
-runint
 DS_Store
 *.out
 *.sdp
-buildcont
+dev-*
